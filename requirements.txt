@@ -1,0 +1,7 @@
+chess==1.11.2
+mss==10.2.0
+numpy==2.5.1
+PySide6==6.11.1
+pytesseract==0.3.13
+Requests==2.34.2
+ultralytics==8.4.92
