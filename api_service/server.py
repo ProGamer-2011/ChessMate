@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+import sys
 from typing import Any
 
-from chesscom_sync.chesscom_sync import sync_chesscom_profile
-from chesscom_sync.engine_analyzer import analyze_games as engine_analyze_games
-from chesscom_sync.game_analyzer import analyze_games as factual_analyze_games
-from chesscom_sync.profile_builder import build_profile_bundle
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from player_profile.profile_manager import load_profile, save_profile
 from updater.updater import Updater
 
@@ -88,6 +91,11 @@ class ChessMateHandler(BaseHTTPRequestHandler):
                 max_games = 20
 
             try:
+                from chesscom_sync.chesscom_sync import sync_chesscom_profile
+                from chesscom_sync.engine_analyzer import analyze_games as engine_analyze_games
+                from chesscom_sync.game_analyzer import analyze_games as factual_analyze_games
+                from chesscom_sync.profile_builder import build_profile_bundle
+
                 games = sync_chesscom_profile(username=username or None, max_games=max_games)
 
                 factual_result = factual_analyze_games(games, username or None)

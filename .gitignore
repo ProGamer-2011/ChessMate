@@ -1,4 +1,7 @@
 engine/stockfish.exe
+__pycache__/
+*.pyc
+
 # Flutter build artifacts
 frontend_flutter/.dart_tool/
 frontend_flutter/.flutter-plugins
